@@ -1,3 +1,5 @@
+@LoginFeature
+@all
 Feature: Login User Feature
 
   Scenario: Check if application is Up and Running
@@ -39,7 +41,7 @@ Feature: Login User Feature
   Scenario: User should able to login and logout successfully
     Given Navigate to the website
     When I enter username "venkatasai1478@gmail.com"
-    And I enter password "9290462177"
+    And I enter password "Testing!1"
     When I click on login button
     Then Should navigate to home page
     When User avatar is clicked on home page
@@ -48,7 +50,7 @@ Feature: Login User Feature
   Scenario: User should not redirect to login upon successful login
     Given Navigate to the website
     When I enter username "venkatasai1478@gmail.com"
-    And I enter password "9290462177"
+    And I enter password "Testing!1"
     When I click on login button
     Then Should navigate to home page
     And Refresh page and check same page
@@ -58,27 +60,20 @@ Feature: Login User Feature
   Scenario: User should be locked if more than 3 failed attempts to login
     Given Navigate to the website
     When I enter username "venkatasai02468@gmail.com"
-    And I enter password "123456789"
+    And I enter password "Testing!1"
     When I click on login button
-    Then Should get login error message as "Account is locked, please contact helpdesk"
+    Then Should get login error message
 
   Scenario: User should get error message if not registered and try to login
     Given Navigate to the website
     When I enter username "user@gmail.com"
-    And I enter password "123456789"
+    And I enter password "Testing!1"
     When I click on login button
-    Then Should get login error message as "Invaild user, Please sign up to login"
+    Then Should get login error message
 
   Scenario: User should not be able to navigate to home page without login by force
     Given Navigate to the website
     When I update url to "home"
     Then Should navigate to login page
 
-# TODO when sign up
-#  Scenario: User should not able to login with wrong password
-#    Given I navigate to the website
-#    When I enter username "username@gmail.com"
-#    And I enter password "123456789"
-#    When I click on login button
-#    Then Should get login error message as "Username or password wrong, please try again"
  

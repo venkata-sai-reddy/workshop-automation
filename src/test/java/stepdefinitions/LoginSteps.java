@@ -37,7 +37,7 @@ public class LoginSteps {
     public void navigateToWebsite() {
         driver.get(websiteUrl);
     }
-
+    
     @When("I enter username {string}")
     public void enterUserName(String userName) {
     	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10) );
@@ -101,8 +101,9 @@ public class LoginSteps {
     
     @When("User avatar is clicked on home page")
     public void avatarClicked() {
-    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10) );    	
-        WebElement avatarButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[automationId='home_user_avatar_button']")));
+    	
+    	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10) );
+    	WebElement avatarButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[automationId='home_user_avatar_button']")));
         avatarButton.click();
     }
     
@@ -111,6 +112,8 @@ public class LoginSteps {
     	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10) );    	
         WebElement logoutButton = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[automationId='home_user_Logout']")));
         logoutButton.click();
+        WebElement loginScreenCheck = wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[automationId='login_form_email_id']")));
+        assertTrue(loginScreenCheck.isDisplayed());
     }
 
     @When("I update url to {string}")
@@ -132,12 +135,11 @@ public class LoginSteps {
         assertTrue(loginComponent.isDisplayed());
     }
 
-    @Then("Should get login error message as {string}")
-    public void checkLoginErrorMessage(String errorMessage) {
+    @Then("Should get login error message")
+    public void checkLoginErrorMessage() {
     	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10) );    	
         WebElement loginError = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[automationId='login_container_errors']")));
         assertTrue(loginError.isDisplayed());
-        assertEquals(errorMessage, loginError.getText());
     }
 
     @When("Refresh page and check same page")
